@@ -1,0 +1,198 @@
+{% load static %}
+
+{% block content %}
+<style media="screen">
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+  body {
+    background-color: #3a76e0;
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 20px; /* Add some padding at the top */
+  }
+
+  .container {
+    margin: 0 auto;
+    max-width: 600px;
+  }
+
+  .card {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.10rem;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-header {
+    padding: 0.75rem 1.25rem;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 1.5rem;
+    color: #333;
+  }
+
+  .track {
+    position: relative;
+    background-color: #ddd;
+    height: 7px;
+    margin-bottom: 60px;
+    margin-top: 50px;
+    display: flex;
+  }
+
+  .track .step {
+    flex-grow: 1;
+    text-align: center;
+    position: relative;
+  }
+
+  .track .step::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 7px;
+    background: #ddd;
+    position: absolute;
+    left: 0;
+    top: 18px;
+  }
+
+  .track .step.active::before {
+    background: #FF5722;
+  }
+
+  .track .icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 100%;
+    background: #ddd;
+    text-align: center;
+    color: #fff;
+  }
+
+  .track .icon i {
+    line-height: 40px;
+  }
+
+  .track .step.active .icon {
+    background: #ee5435;
+  }
+
+  .track .text {
+    margin-top: 7px;
+  }
+
+  .itemside {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .itemside .aside {
+    flex-shrink: 0;
+  }
+
+  .img-sm {
+    width: 80px;
+    height: 80px;
+    padding: 7px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  .itemside .info {
+    padding-left: 15px;
+  }
+
+  .itemside .title {
+    margin-bottom: 5px;
+    color: #212529;
+    font-size: 16px;
+  }
+
+  .p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  .btn-warning {
+    display: inline-block;
+    border: 1px solid #ee5435;
+    color: #fff;
+    background-color: #ee5435;
+    border-radius: 4px;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-warning:hover {
+    background-color: #ff2b00;
+    border-color: #ff2b00;
+  }
+</style>
+
+<h3 style="text-align:center; color: #fff;">Thank You For Your Order, <strong>{{ request.user }}</strong>!</h3>
+<div class="container">
+    <header class="card-header">My Orders / Tracking</header>
+
+    {% for products, order in data %}
+    <article class="card">
+        <div class="card-body">
+            <ul class="row" style="margin-left:20px; margin-top:20px;">
+                <li class="col-md-4">
+                    <figure class="itemside mb-3">
+                        {% for product in products %}
+                       
+                        <figcaption class="info align-self-center">
+                            <p class="title"><strong>Name:</strong> {{ product.name }} <br> <strong>Description:</strong> {{ product.description }}</p>
+                            <span class="text-muted"><strong>Price:</strong> {{ product.price }}</span>
+                        </figcaption>
+                        {% endfor %}
+                    </figure>
+                </li>
+                <li class="col-md-4">
+                    <div class="col"><strong>Delivery Address:</strong> <br> {{ order.address }}</div>
+                </li>
+                <li class="col-md-4">
+                    <div class="col"><strong>Status:</strong> <br> {{ order.status }} </div> <br>
+                    <h4><a href="" class="btn-warning">THANK YOU</a></h4>
+                </li>
+            </ul>
+            <hr>
+
+            <div class="track">
+                {% if order.status == 'Pending' %}
+                <div class="step active"> <span class="icon"><i class="fa fa-frown-o"></i></span> <span class="text">Order Pending</span> </div>
+                <div class="step"> <span class="icon"><i class="fa fa-check"></i></span> <span class="text">Order Confirmed</span> </div>
+                <div class="step"> <span class="icon"><i class="fa fa-truck"></i></span> <span class="text">On the way</span> </div>
+                <div class="step"> <span class="icon"><i class="fa fa-home"></i></span> <span class="text">Delivered</span> </div>
+                {% elif order.status == 'Order Confirmed' %}
+                <div class="step active"> <span class="icon"><i class="fa fa-frown-o"></i></span> <span class="text">Order Pending</span> </div>
+                <div class="step active"> <span class="icon"><i class="fa fa-check"></i></span> <span class="text">Order Confirmed</span> </div>
+                <div class="step"> <span class="icon"><i class="fa fa-truck"></i></span> <span class="text">On the way</span> </div>
+                <div class="step"> <span class="icon"><i class="fa fa-home"></i></span> <span class="text">Delivered</span> </div>
+                {% elif order.status == 'Out for Delivery' %}
+                <div class="step active"> <span class="icon"><i class="fa fa-frown-o"></i></span> <span class="text">Order Pending</span> </div>
+                <div class="step active"> <span class="icon"><i class="fa fa-check"></i></span> <span class="text">Order Confirmed</span> </div>
+                <div class="step active"> <span class="icon"><i class="fa fa-truck"></i></span> <span class="text">On the way</span> </div>
+                <div class="step"> <span class="icon"><i class="fa fa-home"></i></span> <span class="text">Delivered</span> </div>
+                {% else %}
+                <div class="step active"> <span class="icon"><i class="fa fa-frown-o"></i></span> <span class="text">Order Pending</span> </div>
+                <div class="step active"> <span class="icon"><i class="fa fa-check"></i></span> <span class="text">Order Confirmed</span> </div>
+                <div class="step active"> <span class="icon"><i class="fa fa-truck"></i></span> <span class="text">On the way</span> </div>
+                <div class="step active"> <span class="icon"><i class="fa fa-home"></i></span> <span class="text">Delivered</span> </div>
+                {% endif %}
+            </div>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+<div class="go-back">
+  <button onclick="window.history.back();">Go Back</button>
+</div>
+{% endblock content %}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Admin Login</title>
+    <style>
+       body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #0444c2, #70a8ff); /* Gradient complementing #0463FA */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        color: #002a5c; /* Dark blue for text */
+    }
+    
+    
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2);
+        }
+
+        .container h1 {
+            color: #002a5c;
+            margin-bottom: 30px;
+            font-size: 26px;
+            font-weight: 700;
+            border-bottom: 2px solid #5ebfef;
+            padding-bottom: 10px;
+        }
+
+        .form-content {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+            font-size: 14px;
+            color: #333;
+            transition: border-color 0.3s ease, background 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-control:focus {
+            border-color: #5ebfef;
+            background: #fff;
+        }
+
+        .btnSubmit {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            background: #002a5c;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .btnSubmit:hover {
+            background: #002a5c;
+            transform: scale(1.03);
+        }
+
+        .text-center {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .text-center a {
+            color: #002a5c;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .text-center a:hover {
+            color: #002a5c;
+        }
+
+    </style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <div class="container register-form">
+            <h1>Admin Login</h1>
+            <div class="form-content">
+                <div class="form-group">
+                    {% render_field form.username class="form-control" placeholder="Username" %}
+                </div>
+                <div class="form-group">
+                    {% render_field form.password class="form-control" placeholder="Password" %}
+                </div>
+                <button type="submit" class="btnSubmit">Login</button>
+                <div class="text-center">
+                    Do not have an account? <a href="adminsignup">Signup here</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

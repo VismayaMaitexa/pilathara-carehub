@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manual Entry</title>
+</head>
+<body>
+    <h1>Enter Missing Data</h1>
+    <form action="{% url 'manual_entry' %}" method="post">
+        {% csrf_token %}
+        
+        {% for value in missing_values %}
+            <label>{{ value }}:</label>
+            {% if value == "Hemoglobin" %}
+                <input type="number" step="0.1" name="{{ value }}" placeholder="Enter Hemoglobin level" required><br>
+            {% elif value == "MCV" %}
+                <input type="number" step="0.1" name="{{ value }}" placeholder="Enter MCV value" required><br>
+            {% elif value == "MCH" %}
+                <input type="number" step="0.1" name="{{ value }}" placeholder="Enter MCH value" required><br>
+            {% elif value == "MCHC" %}
+                <input type="number" step="0.1" name="{{ value }}" placeholder="Enter MCHC value" required><br>
+            {% elif value == "Gender" %}
+                <select name="{{ value }}" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select><br>
+            {% else %}
+                <input type="text" name="{{ value }}" placeholder="Enter {{ value }}" required><br>
+            {% endif %}
+        {% endfor %}
+        
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,91 @@
+{% extends 'hospital/doctor_base.html' %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Prescription</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            background: linear-gradient(to right, #f9f8f8, #f8fafa);
+            padding-top: 0px;
+        }
+
+        .container {
+            padding: 10px;
+            border-radius: 3px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .btn-upload {
+            background-color: #5c5960;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 5px;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-upload:hover {
+            background-color: #6195ef;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: red;
+        }
+    </style>
+</head>
+<br><br><br>
+<body>
+    <div class="container" style="background-color: #3aa3ae;">
+        <h2>Upload Prescription</h2>
+    </div>
+    <div class="container">
+        <form method="post" enctype="multipart/form-data" id="prescription-form">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-upload">Upload</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("prescription-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+            var form = this;
+
+            // Show success message before submitting
+            setTimeout(function() {
+                alert("Prescription uploaded successfully!");
+                form.submit(); // Submit the form after showing alert
+            }, 200);
+        });
+    </script>
+</body>
+{% endblock content %}

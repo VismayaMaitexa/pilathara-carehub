@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Register in Hospital</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0444c2, #70a8ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2);
+        }
+
+        .container h1 {
+            color: #002a5c;
+            margin-bottom: 30px;
+            font-size: 26px;
+            font-weight: 700;
+            border-bottom: 2px solid #5ebfef;
+            padding-bottom: 10px;
+        }
+
+        .form-content {
+            margin-top: 20px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .form-group {
+            width: 48%;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+            font-size: 14px;
+            color: #333;
+            transition: border-color 0.3s ease, background 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-control:focus {
+            border-color: #5ebfef;
+            background: #fff;
+        }
+
+        .btnSubmit {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            background: #002a5c;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btnSubmit:hover {
+            background: #002a5c;
+            transform: scale(1.03);
+        }
+
+        .text-center {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .text-center a {
+            color: #002a5c;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .text-center a:hover {
+            color: #146b63;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container register-form">
+            <h1>Register to Clinic</h1>
+            <div class="form-content">
+                <div class="row">
+                    <div class="form-group">
+                        {% render_field userForm.first_name class="form-control" placeholder="First Name" %}
+                    </div>
+                    <div class="form-group">
+                        {% render_field userForm.last_name class="form-control" placeholder="Last Name" %}
+                    </div>
+                    <div class="form-group">
+                        {% render_field userForm.username class="form-control" placeholder="Username" %}
+                    </div>
+                    <div class="form-group">
+                        {% render_field userForm.password class="form-control" placeholder="Password" %}
+                    </div>
+                    <div class="form-group">
+                        {% render_field doctorForm.department class="form-control" placeholder="Department" %}
+                    </div>
+                    <div class="form-group">
+                        {% render_field doctorForm.mobile class="form-control" placeholder="Mobile" %}
+                    </div>
+                    <div class="form-group">
+                        {% render_field doctorForm.address class="form-control" placeholder="Address" %}
+                    </div>
+                    <div class="form-group">
+                        {% render_field doctorForm.profile_pic required="required" class="form-control" placeholder="Profile Picture" %}
+                    </div>
+                </div>
+                <button type="submit" class="btnSubmit">Register</button>
+                <div class="text-center">Already have an account? <a href="doctorlogin">Login here</a></div>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>

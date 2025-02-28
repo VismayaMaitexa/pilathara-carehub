@@ -1,0 +1,53 @@
+{% extends 'hospital/pharmacy_base.html' %}
+{% load static %}
+{% block content %}
+<br>
+{% include 'hospital/pharmacy_dashboard_cards.html' %}
+<br><br><br><br><br>
+
+<hr><hr>
+<div class="container">
+
+    <div class="panel panel-primary">
+        <div class="panel-heading" style="text-align:center;">
+            <h6 class="panel-title">Recent Booking</h6>
+        </div>
+        <table class="table table-hover" id="dev-table">
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Mobile</th>
+                    <th>Delivery Address</th>
+                    <th>Item Name</th>
+                    <th>Item Picture</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product, customer, order in data %}
+                <tr>
+                    <td>{{ order.patient.user.username }}</td>
+                    <td>{{ order.patient.mobile }}</td>
+                    <td>{{ order.address }}</td>
+                    <td>{{ product.name }}</td>
+                    <td><img src="{% static product.product_image.url %}" alt="Item Picture" height="40px" width="40px" /></td>
+                    <td>
+                        {% if order.status == 'Pending' %}
+                            <span class="label label-info">{{ order.status }}</span>
+                        {% elif order.status == 'Delivered' %}
+                            <span class="label label-success">{{ order.status }}</span>
+                        {% elif order.status == 'Out for Delivery' %}
+                            <span class="label label-warning">{{ order.status }}</span>
+                        {% else %}
+                            <span class="label label-primary">{{ order.status }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+{% endblock content %}

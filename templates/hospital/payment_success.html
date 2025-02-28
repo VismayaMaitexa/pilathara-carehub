@@ -1,0 +1,82 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block content %}
+<style media="screen">
+  body {
+    background-color: #1069cf;
+    font-family: Arial, sans-serif;
+  }
+
+  .success-page {
+    max-width: 600px;
+    margin: 100px auto; /* Center vertically and horizontally */
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+  }
+
+  .success-page img {
+    max-width: 80px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .success-page h2 {
+    color: #0014ff;
+    margin-top: 20px;
+    font-size: 24px;
+  }
+
+  .success-page p {
+    color: #333;
+    font-size: 16px;
+    margin: 15px 0;
+  }
+
+  .btn-view-orders,
+  .btn-continue-shopping {
+    display: block;
+    border: 1px solid #47c7c5;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    color: #fff;
+    background-color: #0044cc;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-view-orders:hover,
+  .btn-continue-shopping:hover {
+    background-color: #0033aa;
+  }
+
+  .btn-continue-shopping {
+    background-color: #0044cc;
+  }
+
+  .btn-continue-shopping:hover {
+    background-color: #0033aa;
+  }
+
+  a {
+    text-decoration: none;
+  }
+</style>
+
+<div class="success-page">
+  <h2>Payment Successful!</h2>
+  <p>We are delighted to inform you that we received your payment.</p>
+  <a href="/my-order" class="btn-view-orders">View Orders</a>
+  <a href="/customer-home" class="btn-continue-shopping">Continue Shopping</a>
+</div>
+<div class="go-back">
+  <button onclick="window.history.back();">Go Back</button>
+</div>
+
+{% endblock content %}

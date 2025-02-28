@@ -1,0 +1,115 @@
+{% extends "hospital/doctor_base.html" %}
+
+{% block content %}
+<style>
+/* Center the card vertically and horizontally in the viewport */
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px; /* Add padding for smaller screens */
+    position: relative;
+    top: -100px; /* Lift the container upwards */
+}
+
+/* Style the card */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Adjust card width to fit the content */
+    max-width: 500px; /* Ensure the card does not grow too large */
+    margin: 0 auto; /* Keep it centered horizontally */
+}
+
+/* Card header */
+.card-header {
+    background-color: #155eac;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    border-bottom: none;
+}
+
+/* Card body */
+.card-body {
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+/* Form input fields */
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Submit button */
+.btn-primary {
+    background-color: #188189;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Form labels */
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Add spacing between form elements */
+.form-group {
+    margin-bottom: 15px;
+}
+</style>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3>Upload Consultation Link</h3>
+        </div>
+        <div class="card-body">
+            <form method="post" id="consultation-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="patient">Patient:</label>
+                    <select id="patient" name="patient" class="form-control">
+                        {% for patient in form.patient.field.queryset %}
+                            <option value="{{ patient.id }}" {% if patient.id == form.patient.value %}selected{% endif %}>
+                                {{ patient }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="consultation_link">Consultation Link:</label>
+                    <input type="url" id="consultation_link" name="consultation_link" class="form-control" value="{{ form.consultation_link.value }}" placeholder="Enter consultation link">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Upload Link</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("consultation-form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent default form submission
+        var form = this;
+
+        // Simulate form submission delay
+        setTimeout(function() {
+            alert("Consultation link uploaded successfully!");
+            form.submit(); // Submit the form after showing alert
+        }, 200);
+    });
+</script>
+
+{% endblock %}

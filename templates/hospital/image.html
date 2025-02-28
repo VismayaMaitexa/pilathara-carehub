@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Text Extraction</title>
+    <style>
+        
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'images/medicine2.png' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 30px;
+            font-size: 2.5rem;
+            color: #f5f5f5;
+        }
+
+        form {
+            margin: 30px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            width: 400px;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .extracted-text, .product-list {
+            margin-top: 30px;
+        }
+
+        .product-card {
+            display: inline-block;
+            margin: 20px;
+            width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+            color: #333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-card .info-inner {
+            padding: 15px;
+        }
+
+        .product-card .info-inner .p-company {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #f39c12;
+        }
+
+        .product-card .a-size {
+            font-size: 0.9rem;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .box-down {
+            background-color: #f1f1f1;
+            padding: 15px;
+        }
+
+        .cart {
+            display: block;
+            text-decoration: none;
+            color: #fff;
+            background-color: #28a745;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .cart:hover {
+            background-color: #218838;
+        }
+
+        .cart .price {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Text Extraction</h1>
+
+    <form action="/image" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Extract Text</button>
+    </form>
+
+    {% if extracted_text %}
+    <div class="extracted-text">
+        <h2>Extracted Text:</h2>
+        <ul>
+            {% for item in extracted_text %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="product-list">
+        <h2>Matching Products:</h2>
+        <div class="row">
+            {% for p in products %}
+            {% for item in extracted_text %}
+                {% if p.name in item %}
+                <div class="product-card">
+                    <img src="{{ p.product_image.url }}" alt="product pic">
+                    <div class="info-inner">
+                        <span class="p-company">{{ p.name }}</span>
+                        <div class="a-size">{{ p.description }}</div>
+                    </div>
+                    <div class="box-down">
+                        <a class="cart" href="{% url 'add-to-cart' p.id %}">
+                            <span class="price">₹ {{ p.price }}</span><br>
+                            <span class="txt">Add to Cart</span>
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</body>
+</html>

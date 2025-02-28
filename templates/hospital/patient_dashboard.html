@@ -1,0 +1,28 @@
+{% extends 'hospital/patient_base.html' %}
+{% load static %}
+{% block content %}
+{% include 'hospital/patient_dashboard_cards.html' %}
+<style>
+    .float {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background-color: rgb(32, 51, 163);
+        color: white;
+        border-radius: 50px;
+        text-align: center;
+        box-shadow: 2px 2px 3px #999;
+        right: 40px; /* Position from the right edge */
+        bottom: 20px; /* Position from the bottom of the page */
+    }
+
+    .my-float {
+        margin-top: 22px; /* Center the icon within the button */
+    }
+</style>
+
+    <br><br><br><br>
+    <a href="/customer-home" class="float">
+        <i class="fa fa-plus my-float"></i>
+    </a>
+{% endblock content %}

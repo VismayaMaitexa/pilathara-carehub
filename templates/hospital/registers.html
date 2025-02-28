@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <title>Klinik - Clinic Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #385a93, #9ab9ec);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .text-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            margin-bottom: 30px;
+        }
+
+        .text-center h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        .team-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .team-item {
+            flex: 1;
+            max-width: 350px;
+            height: 420px;
+            transition: transform 0.3s ease-in-out;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .team-item img {
+            width: 100%;
+            height: 360px;
+            object-fit: cover;
+            border-bottom: 3px solid #144696;
+        }
+
+        .team-text {
+            background-color: #3b72c9;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .team-text h5 {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .team-item:hover {
+            transform: scale(1.05);
+        }
+
+        .team-item:hover .team-text {
+            background-color: #0444c2;
+        }
+
+        .team-item a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .go-back {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .go-back button {
+            background-color: #3b72c9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .go-back button:hover {
+            background-color: #0444c2;
+        }
+
+        @media (max-width: 768px) {
+            .team-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .team-item {
+                max-width: 90%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center">
+                <h1>Sign-Up As</h1>
+            </div>
+            <div class="team-container wow fadeInUp" data-wow-delay="0.1s">
+                <div class="team-item">
+                    <a href="doctorsignup">
+                        <img class="img-fluid" src="{% static 'img/team-1.jpg' %}" alt="Doctor">
+                        <div class="team-text">
+                            <h5>Doctor</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="team-item">
+                    <a href="patientsignup">
+                        <img class="img-fluid" src="{% static 'img/pat.jpg' %}" alt="Patient">
+                        <div class="team-text">
+                            <h5>Patient</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="go-back">
+                <button onclick="window.history.back();">Go Back</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

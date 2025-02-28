@@ -1,0 +1,115 @@
+{% load static %}
+{% block content %}
+
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<style media="screen">
+  body {
+  background: linear-gradient(135deg, #385a93, #9ab9ec); /* Set your desired background color */
+  margin: 0; /* Remove default body margin */
+  padding: 0; /* Remove default body padding */
+}
+  .button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #140655;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button2 {
+  background-color: #140655;
+  color: white;
+  border: 2px solid #140655;
+}
+
+.button2:hover {
+  background-color: #140655;
+  color: white;
+}
+
+</style>
+
+</head>
+<br><br><br><br>
+
+
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 style="text-align:center;" class="panel-title">My Cart</h6>
+    </div>
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Image</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Remove From Cart</th>
+
+        </tr>
+      </thead>
+      {% for p in products %}
+  {% if p %}
+
+      <tr>
+        <td> {{p.name}}</td>
+        <td> <img src="{{p.product_image.url }}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>{{p.price}}</td>
+        <td>{{p.description}}</td>
+        <td><a class="btn btn-danger btn-xs" href=""><span class="glyphicon glyphicon-trash"></span></a></td>
+
+      </tr>
+      {%else%}
+      <br><br><br>
+      <h1>no products</h1>
+      {% endif %}
+      {% endfor %}
+    </table>
+  </div>
+</div>
+<br><br><br>
+<div style="text-align: center;">
+  <button class="button button2">Total {{total}}</button>
+  <a href="/patient-address"><button class="button" ><span>Purchase </span></button></a>
+</div>
+
+
+<br><br><br><br><br>
+{% endblock content %}

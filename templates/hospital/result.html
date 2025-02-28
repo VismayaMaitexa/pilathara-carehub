@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anemia Prediction Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-2xl mx-auto p-6 mt-10 bg-white shadow-xl rounded-lg">
+        <h1 class="text-2xl font-bold text-gray-800 mb-4">Anemia Prediction Results</h1>
+
+        <div class="mb-4">
+            <p class="text-lg text-gray-700">Prediction: <span class="font-semibold">{{ result }}</span></p>
+        </div>
+
+        <p class="text-lg text-gray-700">
+            Anemia Detected:
+            {% if anemia_detected %}
+                <span class="font-semibold text-red-600">Yes</span>
+            {% else %}
+                <span class="font-semibold text-green-600">No</span>
+            {% endif %}
+        </p>
+        
+        {% if file_url %}
+        <div class="mb-6">
+            <p class="text-lg text-gray-700">Uploaded File:</p>
+            <img src="{{ file_url }}" alt="Uploaded File" class="mt-2 max-w-full h-auto border rounded-lg shadow-sm">
+        </div>
+        {% endif %}
+
+        <div class="flex space-x-4">
+            <a href="/upload" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow">Upload Another File</a>
+            <a href="/manual_entry" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded shadow">Enter Manually</a>
+        </div>
+    </div>
+</body>
+</html>

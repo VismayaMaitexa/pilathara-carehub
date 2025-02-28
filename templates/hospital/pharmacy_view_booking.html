@@ -1,0 +1,81 @@
+{% extends 'hospital/pharmacy_base.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+  </style>
+</head>
+
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 class="panel-title">Total Orders</h6>
+    </div>
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+          <th>Patient Name</th>
+          <th>Delivery Address</th>
+          <th>Item</th>
+          <th>Image</th>
+          <th>Status</th>
+          <th>Update Status</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product, patient, order in data %}
+        <tr>
+          <td>{{ order.patient.user.username }}</td>
+          
+          <td>{{ order.address }}</td>
+          <td>
+            {% if product %}
+              {{ product.name }}
+            {% else %}
+              N/A
+            {% endif %}
+          </td>
+          <td>
+            {% if product and product.product_image %}
+              <img src="{{ product.product_image.url }}" alt="Item Image" height="40px" width="40px" />
+            {% else %}
+              <img src="{% static 'default_image.png' %}" alt="Default Image" height="40px" width="40px" />
+            {% endif %}
+          </td>
+          <td>
+            {% if order.status == 'Pending' %}
+              <span class="label label-info">{{ order.status }}</span>
+            {% elif order.status == 'Delivered' %}
+              <span class="label label-success">{{ order.status }}</span>
+            {% elif order.status == 'Out for Delivery' %}
+              <span class="label label-warning">{{ order.status }}</span>
+            {% else %}
+              <span class="label label-primary">{{ order.status }}</span>
+            {% endif %}
+          </td>
+          <td><a class="btn btn-primary btn-xs" href="{% url 'update-order' order.id %}"><span class="glyphicon glyphicon-edit"></span></a></td>
+          <td><a class="btn btn-danger btn-xs" href="{% url 'delete-order' order.id %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}

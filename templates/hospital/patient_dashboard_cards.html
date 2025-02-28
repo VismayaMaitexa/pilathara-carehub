@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Doctor Information</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .market-updates {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .market-update-gd {
+      flex: 1 1 20%;
+      min-width: 250px;
+    }
+
+    .market-update-block {
+      padding: 1.5em;
+      background: #045333;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease;
+      text-align: center;
+    }
+
+    .market-update-block h3 {
+      color: #fff;
+      font-size: 1.5em;
+      font-family: 'Carrois Gothic', sans-serif;
+      margin: 0.5em 0;
+    }
+
+    .market-update-block h4 {
+      font-size: 1.1em;
+      color: #ddd;
+      margin: 0.2em 0;
+      font-family: 'Carrois Gothic', sans-serif;
+    }
+
+    .market-update-block.clr-block-1 {
+      background: #1857b6e7;
+    }
+
+    .market-update-block.clr-block-2 {
+      background: #1857b6e7;
+    }
+
+    .market-update-block.clr-block-3 {
+      background: #1857b6e7;
+    }
+
+    .market-update-block:hover {
+      background: #2b2929;
+    }
+
+    .market-update-right i {
+      font-size: 3em;
+      color: #0b948b;
+      width: 80px;
+      height: 80px;
+      background: #fff;
+      text-align: center;
+      border-radius: 50%;
+      line-height: 1.7em;
+      display: inline-block;
+    }
+
+    .market-update-left {
+      padding: 0;
+    }
+
+    .clearfix {
+      clear: both;
+    }
+  </style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <div class="market-updates">
+    <div class="market-update-gd">
+      <div class="market-update-block clr-block-1">
+        <div class="market-update-left">
+          <h3>{{doctorName}}</h3>
+          <h4>Doctor Name</h4>
+        </div>
+        <div class="market-update-right">
+          <i class="fa fa-user-o"></i>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <div class="market-update-gd">
+      <div class="market-update-block clr-block-3">
+        <div class="market-update-left">
+          <h3>{{doctorMobile}}</h3>
+          <h4>Doctor Mobile</h4>
+        </div>
+        <div class="market-update-right">
+          <i class="fa fa-mobile"></i>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <div class="market-update-gd">
+      <div class="market-update-block clr-block-3">
+        <div class="market-update-left">
+          <h3>{{admitDate}}</h3>
+          <h4>Admit Date</h4>
+        </div>
+        <div class="market-update-right">
+          <i class="fa fa-calendar-o"></i>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

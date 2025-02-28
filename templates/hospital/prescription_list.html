@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescription List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #d2d8e1; 
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 3px solid #064784;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #5660ce;
+        }
+        .no-prescriptions {
+            text-align: center;
+            margin-top: 20px;
+        }
+        a.download-link {
+            color: #0033ff;
+            text-decoration: none;
+        }
+        a.download-link:hover {
+            /* text-decoration: underline; */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prescription List</h1>
+
+        {% if prescriptions %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Prescription ID</th>
+                        <th>File</th>
+                        <th>Uploaded At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for prescription in prescriptions %}
+                        <tr>
+                            <td>{{ prescription.id }}</td>
+                            <td>
+                                <a href="{{ prescription.prescription_file.url }}" class="download-link" download>Download Prescription</a>
+                            </td>
+                            <td>{{ prescription.uploaded_at }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-prescriptions">No prescriptions found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<style type="text/css">
+        body, html {
+        height: 100vh; /* Set the height to 100vh to ensure full screen coverage */
+        margin: 0;
+        background: #3a76e0; 
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center; /* Vertically center the content */
+        justify-content: center; /* Horizontally center the content */
+    }
+
+        .form-container {
+        width: 200%;  
+        max-width: 800px; 
+        padding: 40px;
+        background-color: white; 
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin: 100px auto; /* Increased margin-top to move it down */
+        transform: translateX(-20%);
+    }
+
+
+    .form-style-1 {
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-style-1 li {
+        list-style: none;
+        margin-bottom: 20px;
+    }
+
+    .form-style-1 label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .form-style-1 input[type="text"],
+    .form-style-1 input[type="date"],
+    .form-style-1 input[type="datetime"],
+    .form-style-1 input[type="number"],
+    .form-style-1 input[type="search"],
+    .form-style-1 input[type="time"],
+    .form-style-1 input[type="url"],
+    .form-style-1 input[type="email"],
+    .form-style-1 textarea,
+    .form-style-1 select {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        color: #555;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-style-1 input[type="text"]:focus,
+    .form-style-1 input[type="date"]:focus,
+    .form-style-1 input[type="datetime"]:focus,
+    .form-style-1 input[type="number"]:focus,
+    .form-style-1 input[type="search"]:focus,
+    .form-style-1 input[type="time"]:focus,
+    .form-style-1 input[type="url"]:focus,
+    .form-style-1 input[type="email"]:focus,
+    .form-style-1 textarea:focus,
+    .form-style-1 select:focus {
+        border-color: #4a90e2;
+        box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+    }
+
+    .form-style-1 .field-textarea {
+        height: 120px;
+    }
+
+    .form-style-1 input[type="submit"] {
+        background-color: #4a90e2;
+        color: white;
+        padding: 14px 30px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+    }
+
+    .form-style-1 input[type="submit"]:hover {
+        background-color: #3a7bd5;
+    }
+
+    .form-style-1 .required {
+        color: red;
+    }
+
+    .no-products-message {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 24px;
+        color: #180f0e;
+        bottom: -20px;
+    }
+
+    .no-products-message h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: normal;
+        color: #333;
+    }
+</style>
+
+<div class="form-container">
+    {% if product_in_cart %}
+        <form method="post">
+            {% csrf_token %}
+            <ul class="form-style-1">
+                <li>
+                    <label>Email <span class="required">*</span></label>
+                    {% render_field addressForm.Email class="field-long" placeholder="Email" %}
+                </li>
+                <li>
+                    <label>Mobile <span class="required">*</span></label>
+                    {% render_field addressForm.Mobile class="field-long" placeholder="Mobile" %}
+                </li>
+                <li>
+                    <label>Delivery Address <span class="required">*</span></label>
+                    {% render_field addressForm.Address id="field5" class="field-long field-textarea" placeholder="Building Number, City, Pin" %}
+                </li>
+                <li>
+                    <input type="submit" value="Proceed To Pay" />
+                </li>
+            </ul>
+        </form>
+    {% else %}
+        <div class="no-products-message">
+            <h1>Please Add Products In Cart</h1>
+        </div>
+    {% endif %}
+</div>
+
+
+{% endblock content %}
